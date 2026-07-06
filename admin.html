@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Slimes.Hustlers AI Solutions</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/slimes-hustlers-logo.png" alt="Slimes.Hustlers AI Solutions logo" class="brand-logo">
+        <div>
+          <span class="brand-name">Slimes.Hustlers</span>
+          <span class="brand-tag">AI Solutions</span>
+        </div>
+      </a>
+      <nav aria-label="Admin navigation">
+        <button class="button button-secondary" id="logoutBtn">Logout</button>
+        <a class="button button-secondary" href="index.html">Back to Site</a>
+      </nav>
+    </div>
+  </header>
+  <main class="section">
+    <div class="container">
+      <div class="section-heading center">
+        <span>Admin Dashboard</span>
+        <h2>Client Contact Messages</h2>
+        <p>Review submissions from the contact form in real time.</p>
+      </div>
+      <div class="admin-panel">
+        <table class="message-table" id="messageTable">
+          <thead>
+            <tr>
+              <th>Received</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>Company</th>
+              <th>Message</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <p class="form-status" id="adminStatus"></p>
+      </div>
+    </div>
+  </main>
+  <script src="js/admin.js"></script>
+</body>
+</html>

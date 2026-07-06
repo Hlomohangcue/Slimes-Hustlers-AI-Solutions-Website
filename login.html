@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login | Slimes.Hustlers AI Solutions</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    .login-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: calc(100vh - 120px);
+      padding: 2rem;
+    }
+    .login-card {
+      background: white;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 3rem;
+      max-width: 400px;
+      width: 100%;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    .login-card h2 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.75rem;
+      color: #111827;
+    }
+    .login-card p {
+      margin: 0 0 2rem 0;
+      color: #6b7280;
+      font-size: 0.95rem;
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #374151;
+      font-size: 0.95rem;
+    }
+    .form-group input {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #d1d5db;
+      border-radius: 6px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      transition: border-color 0.2s;
+    }
+    .form-group input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+    .login-button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #3b82f6;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      margin-bottom: 1rem;
+    }
+    .login-button:hover {
+      background-color: #2563eb;
+    }
+    .login-button:disabled {
+      background-color: #9ca3af;
+      cursor: not-allowed;
+    }
+    .error-message {
+      color: #dc2626;
+      background-color: #fee2e2;
+      border: 1px solid #fecaca;
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      display: none;
+      font-size: 0.95rem;
+    }
+    .success-message {
+      color: #059669;
+      background-color: #d1fae5;
+      border: 1px solid #a7f3d0;
+      border-radius: 6px;
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+      display: none;
+      font-size: 0.95rem;
+    }
+    .back-link {
+      text-align: center;
+      margin-top: 1.5rem;
+    }
+    .back-link a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 0.95rem;
+    }
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="index.html" class="brand">
+        <img src="images/slimes-hustlers-logo.png" alt="Slimes.Hustlers AI Solutions logo" class="brand-logo">
+        <div>
+          <span class="brand-name">Slimes.Hustlers</span>
+          <span class="brand-tag">AI Solutions</span>
+        </div>
+      </a>
+      <nav aria-label="Admin navigation">
+        <a class="button button-secondary" href="index.html">Back to Site</a>
+      </nav>
+    </div>
+  </header>
+  <main class="login-container">
+    <div class="login-card">
+      <h2>Admin Login</h2>
+      <p>Enter your password to access the admin dashboard</p>
+      
+      <div class="error-message" id="errorMessage"></div>
+      <div class="success-message" id="successMessage"></div>
+
+      <form id="loginForm">
+        <div class="form-group">
+          <label for="password">Admin Password</label>
+          <input 
+            type="password" 
+            id="password" 
+            name="password" 
+            placeholder="Enter admin password" 
+            required
+            autocomplete="current-password"
+          >
+        </div>
+        <button type="submit" class="login-button" id="submitBtn">Login</button>
+      </form>
+
+      <div class="back-link">
+        <a href="index.html">← Back to Website</a>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const passwordInput = document.getElementById('password');
+    const submitBtn = document.getElementById('submitBtn');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+
+    // Check if already logged in
+    window.addEventListener('load', async () => {
+      try {
+        const response = await fetch('/api/contacts');
+        if (response.ok) {
+          // Already logged in
+          window.location.href = '/admin.html';
+        }
+      } catch (error) {
+        // Not logged in, stay on login page
+      }
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Logging in...';
+
+      try {
+        const response = await fetch('/api/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: passwordInput.value })
+        });
+
+        if (response.ok) {
+          successMessage.textContent = 'Login successful! Redirecting...';
+          successMessage.style.display = 'block';
+          setTimeout(() => {
+            window.location.href = '/admin.html';
+          }, 1000);
+        } else {
+          const data = await response.json();
+          if (response.status === 403) {
+            errorMessage.textContent = 'Access denied: Your IP address is not authorized.';
+          } else if (response.status === 401) {
+            errorMessage.textContent = 'Invalid password. Please try again.';
+          } else {
+            errorMessage.textContent = data.error || 'Login failed. Please try again.';
+          }
+          errorMessage.style.display = 'block';
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Login';
+          passwordInput.focus();
+        }
+      } catch (error) {
+        errorMessage.textContent = 'Network error. Please check your connection and try again.';
+        errorMessage.style.display = 'block';
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Login';
+      }
+    });
+
+    // Focus password field on load
+    window.addEventListener('load', () => {
+      passwordInput.focus();
+    });
+  </script>
+</body>
+</html>
