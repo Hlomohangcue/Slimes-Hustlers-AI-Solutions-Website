@@ -19,6 +19,8 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle light / dark mode">🌗</button>
+    <a class="skip-link" href="#main">Skip to main content</a>
   <div class="loader" id="loader">
     <div class="spinner"></div>
   </div>
@@ -33,9 +35,10 @@
         </div>
       </a>
       <button class="drawer-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false">
+        <button class="drawer-toggle" id="navToggle" aria-label="Open navigation" aria-expanded="false" aria-controls="navMenu">
         <span></span><span></span><span></span>
       </button>
-      <nav class="nav drawer-menu" id="navMenu" aria-label="Primary navigation">
+        <nav class="nav drawer-menu" id="navMenu" aria-label="Primary navigation" data-drawer role="navigation" aria-hidden="true">
         <ul class="nav-list">
           <li><a href="#home">Home</a></li>
           <li><a href="#about">About</a></li>
@@ -49,17 +52,38 @@
     </div>
   </header>
 
-  <main>
+  <main id="main">
     <section class="hero" id="home">
       <div class="container hero-grid">
-        <div class="hero-copy">
+        <div class="hero-copy reveal">
           <p class="eyebrow">Premium AI Consulting & Automation</p>
           <h1>Transform Your Business with AI-Powered Solutions</h1>
           <p>Helping businesses automate processes, reduce costs, and accelerate growth through AI and technology.</p>
           <div class="hero-actions">
-            <a class="button button-primary" href="#contact">Get a Free Consultation</a>
-            <a class="button button-secondary" href="#services">Our Services</a>
+            <a class="button button-primary" href="#contact">Book Consultation</a>
+            <a class="button button-accent" href="#services">Get Started</a>
+            <a class="button button-outline" href="#contact">Contact Us</a>
           </div>
+
+          <div class="hero-stats" aria-hidden="false" aria-label="Company statistics">
+            <div class="stat">
+              <div class="stat-value" data-target="100">0</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" data-target="50">0</div>
+              <div class="stat-label">Clients</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" data-target="99">0</div>
+              <div class="stat-label">Customer Satisfaction %</div>
+            </div>
+            <div class="stat">
+              <div class="stat-value" data-target="5">0</div>
+              <div class="stat-label">Years Experience</div>
+            </div>
+          </div>
+
           <div class="hero-pillars">
             <div>
               <strong>Luxury Tech</strong>
@@ -71,7 +95,7 @@
             </div>
           </div>
         </div>
-        <div class="hero-visual" aria-hidden="true">
+        <div class="hero-visual reveal" aria-hidden="true">
           <div class="visual-card">
             <div class="visual-glow"></div>
             <div class="visual-content">
@@ -124,65 +148,103 @@
           <p>Crafted to accelerate transformation and ensure your technology investments deliver tangible value.</p>
         </div>
         <div class="service-grid">
-          <article class="service-card">
-            <div class="service-icon">🤖</div>
-            <h3>Artificial Intelligence Solutions</h3>
+          <article class="service-card reveal" data-service="Artificial Intelligence">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M12 20v2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.93 4.93l1.41 1.41" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M17.66 17.66l1.41 1.41" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.5" stroke="currentColor" stroke-width="1.6"/></svg>
+            </div>
+            <h3>Artificial Intelligence</h3>
             <p>Custom AI models, predictive analytics, and intelligent automation that make smarter decisions for your business.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Artificial Intelligence">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">⚙️</div>
-            <h3>Business Process Automation</h3>
-            <p>Streamline workflows, reduce manual effort, and improve efficiency with automation designed for your operations.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+
+          <article class="service-card reveal" data-service="Machine Learning">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 12h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4 7h.01M4 17h.01M20 7h.01M20 17h.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Machine Learning</h3>
+            <p>Model training, MLOps, and scalable pipelines to deploy reliable ML into production.</p>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Machine Learning">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">💻</div>
-            <h3>Software Development</h3>
-            <p>End-to-end custom software solutions built with scalability, performance, and future-ready architecture in mind.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+
+          <article class="service-card reveal" data-service="Web Development">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="4" width="18" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M8 20h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Web Development</h3>
+            <p>Modern, responsive web applications built with performance and security in mind.</p>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Web Development">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">🚛</div>
-            <h3>Fleet Management Systems</h3>
-            <p>Advanced fleet platforms for tracking, inspection, and logistics optimization using AI-enabled intelligence.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+
+          <article class="service-card reveal" data-service="Mobile Apps">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="7" y="2" width="10" height="20" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M12 18v.01" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <h3>Mobile Apps</h3>
+            <p>Cross-platform and native mobile apps that connect people to intelligent products.</p>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Mobile Apps">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">🛠️</div>
-            <h3>IT Support Services</h3>
-            <p>Reliable technical support, system maintenance, and infrastructure monitoring to keep your business online.</p>
-            <a class="link-button" href="#contact">Learn More</a>
-          </article>
-          <article class="service-card">
-            <div class="service-icon">🌐</div>
-            <h3>Network Infrastructure</h3>
-            <p>Secure, high-performance networking solutions that support scalable enterprise connectivity and operations.</p>
-            <a class="link-button" href="#contact">Learn More</a>
-          </article>
-          <article class="service-card">
-            <div class="service-icon">☁️</div>
+
+          <article class="service-card reveal" data-service="Cloud Solutions">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20 17.58A5.5 5.5 0 0018 7h-1.26A8 8 0 104 16.25" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
             <h3>Cloud Solutions</h3>
             <p>Cloud migration, management, and SaaS deployment services for flexible modern infrastructure.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Cloud Solutions">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">📊</div>
-            <h3>Data Analytics & Reporting</h3>
+
+          <article class="service-card reveal" data-service="Business Automation">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 7h16M4 12h10M4 17h7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Business Automation</h3>
+            <p>Streamline workflows, reduce manual effort, and improve efficiency with automation designed for your operations.</p>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Business Automation">Learn More</a>
+            </div>
+          </article>
+
+          <article class="service-card reveal" data-service="Data Analytics">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 3v18h18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 13v6M12 7v12M17 10v9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Data Analytics</h3>
             <p>Insight-driven dashboards, reporting pipelines, and analytics to convert data into decisions.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Data Analytics">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">🔒</div>
-            <h3>Cybersecurity Solutions</h3>
+
+          <article class="service-card reveal" data-service="Cybersecurity">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l3 2v3a3 3 0 01-6 0V4l3-2z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M5 11v3a7 7 0 007 7 7 7 0 007-7v-3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <h3>Cybersecurity</h3>
             <p>Threat detection, compliance, and resilience planning to protect your digital assets and reputation.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="Cybersecurity">Learn More</a>
+            </div>
           </article>
-          <article class="service-card">
-            <div class="service-icon">🚀</div>
-            <h3>Digital Transformation Consulting</h3>
+
+          <article class="service-card reveal" data-service="IT Consulting">
+            <div class="service-icon" aria-hidden="true">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.6"/><path d="M8 12h8" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </div>
+            <h3>IT Consulting</h3>
             <p>Strategy, transition planning, and execution support for digital business growth and modernization.</p>
-            <a class="link-button" href="#contact">Learn More</a>
+            <div class="service-actions">
+              <a class="learn-more button-outline" href="#contact" data-service="IT Consulting">Learn More</a>
+            </div>
           </article>
         </div>
       </div>
@@ -300,34 +362,34 @@
           <h2>Start your AI transformation today.</h2>
           <p>Request a consultation or ask about a solution tailored to your business needs.</p>
         </div>
-        <form class="contact-form" id="contactForm" novalidate>
+        <form class="contact-form" id="contactForm" novalidate aria-labelledby="contactHeading" aria-describedby="contactDesc">
           <div class="form-row">
             <label for="fullName">Full Name</label>
-            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required>
-            <span class="error-message" id="nameError"></span>
+            <input type="text" id="fullName" name="fullName" placeholder="Your full name" required aria-required="true" aria-describedby="nameError" aria-invalid="false">
+            <span class="error-message" id="nameError" role="alert" aria-live="polite"></span>
           </div>
           <div class="form-row">
             <label for="email">Email</label>
-            <input type="email" id="email" name="email" placeholder="your@email.com" required>
-            <span class="error-message" id="emailError"></span>
+            <input type="email" id="email" name="email" placeholder="your@email.com" required aria-required="true" aria-describedby="emailError" aria-invalid="false">
+            <span class="error-message" id="emailError" role="alert" aria-live="polite"></span>
           </div>
           <div class="form-row">
             <label for="phone">Phone Number</label>
-            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required>
-            <span class="error-message" id="phoneError"></span>
+            <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" required aria-required="true" aria-describedby="phoneError" aria-invalid="false">
+            <span class="error-message" id="phoneError" role="alert" aria-live="polite"></span>
           </div>
           <div class="form-row">
             <label for="company">Company Name</label>
-            <input type="text" id="company" name="company" placeholder="Company name" required>
-            <span class="error-message" id="companyError"></span>
+            <input type="text" id="company" name="company" placeholder="Company name" required aria-required="true" aria-describedby="companyError" aria-invalid="false">
+            <span class="error-message" id="companyError" role="alert" aria-live="polite"></span>
           </div>
           <div class="form-row full-width">
             <label for="message">Message</label>
-            <textarea id="message" name="message" placeholder="Tell us about your project" rows="5" required></textarea>
-            <span class="error-message" id="messageError"></span>
+            <textarea id="message" name="message" placeholder="Tell us about your project" rows="5" required aria-required="true" aria-describedby="messageError" aria-invalid="false"></textarea>
+            <span class="error-message" id="messageError" role="alert" aria-live="polite"></span>
           </div>
-          <button class="button button-primary" type="submit">Send Message</button>
-          <p class="form-status" id="formStatus" role="status"></p>
+          <button class="button button-primary" type="submit" id="submitButton">Send Message</button>
+          <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
         </form>
       </div>
     </section>
