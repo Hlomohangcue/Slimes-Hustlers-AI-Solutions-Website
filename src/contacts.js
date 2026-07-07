@@ -52,7 +52,23 @@ export async function handleContactsRequest(request, env) {
     try {
       const kv = env && env.CONTACTS_KV;
       if (!kv || typeof kv.list !== 'function') {
-        return new Response(JSON.stringify({ success: false, error: 'KV binding not configured' }), { status: 500, headers: { 'Content-Type': 'application/json' } });
+        const fallback = [];
+        try {
+          if (env && typeof env.ASSETS?.fetch === 'function') {
+            const fallbackResponse = await env.ASSETS.fetch(new Request(new URL('/data/contacts.json', request.url)));
+            if (fallbackResponse.ok) {
+              const fallbackJson = await fallbackResponse.json();
+              if (Array.isArray(fallbackJson)) {
+                fallbackJson.forEach(item => fallback.push(item));
+              }
+            }
+          }
+        } catch (fallbackErr) {
+          console.error('Fallback contacts read error:', fallbackErr);
+        }
+
+        fallback.sort((a, b) => (a.receivedAt < b.receivedAt) ? 1 : -1);
+        return new Response(JSON.stringify(fallback), { status: 200, headers: { 'Content-Type': 'application/json' } });
       }
 
       const all = [];
