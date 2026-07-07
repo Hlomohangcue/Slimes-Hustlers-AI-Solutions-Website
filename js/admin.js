@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Handle logout
   logoutBtn.addEventListener('click', async () => {
     try {
-      await fetch('/api/logout', { method: 'POST' });
+      await fetch('/api/logout', { method: 'POST', credentials: 'include' });
       window.location.href = '/login.html';
     } catch (error) {
       console.error('Logout error:', error);
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   try {
-    const response = await fetch('/api/contacts');
+    const response = await fetch('/api/contacts', { credentials: 'include' });
     
     if (response.status === 401) {
       // Unauthorized - redirect to login
@@ -35,14 +35,31 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     contacts.reverse().forEach(contact => {
       const row = document.createElement('tr');
-      row.innerHTML = `
-        <td>${new Date(contact.receivedAt).toLocaleString()}</td>
-        <td>${contact.fullName}</td>
-        <td>${contact.email}</td>
-        <td>${contact.phone}</td>
-        <td>${contact.company}</td>
-        <td>${contact.message}</td>
-      `;
+
+      const receivedTd = document.createElement('td');
+      receivedTd.textContent = new Date(contact.receivedAt).toLocaleString();
+      row.appendChild(receivedTd);
+
+      const nameTd = document.createElement('td');
+      nameTd.textContent = contact.fullName || '';
+      row.appendChild(nameTd);
+
+      const emailTd = document.createElement('td');
+      emailTd.textContent = contact.email || '';
+      row.appendChild(emailTd);
+
+      const phoneTd = document.createElement('td');
+      phoneTd.textContent = contact.phone || '';
+      row.appendChild(phoneTd);
+
+      const companyTd = document.createElement('td');
+      companyTd.textContent = contact.company || '';
+      row.appendChild(companyTd);
+
+      const messageTd = document.createElement('td');
+      messageTd.textContent = contact.message || '';
+      row.appendChild(messageTd);
+
       tableBody.appendChild(row);
     });
   } catch (error) {
