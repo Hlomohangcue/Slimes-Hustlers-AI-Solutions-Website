@@ -1,0 +1,5 @@
+# Ignore local build or temp files inside public
+*.tmp
+*.log
+.DS_Store
+Thumbs.db

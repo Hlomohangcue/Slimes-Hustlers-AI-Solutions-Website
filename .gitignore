@@ -4,9 +4,6 @@ node_modules/
 # Local environment files
 .env
 
-# Build output
-public/
-
 # OS files
 .DS_Store
 
