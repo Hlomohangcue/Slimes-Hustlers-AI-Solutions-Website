@@ -14,6 +14,38 @@ function parseCookies(cookieHeader) {
   return obj;
 }
 
+function getFallbackStore() {
+  if (typeof globalThis === 'undefined') return [];
+  if (!Array.isArray(globalThis.__CONTACTS_FALLBACK_STORE__)) {
+    globalThis.__CONTACTS_FALLBACK_STORE__ = [];
+  }
+  return globalThis.__CONTACTS_FALLBACK_STORE__;
+}
+
+function getContactsKv(env) {
+  return env?.CONTACTS_KV || env?.CONTACT_KV || null;
+}
+
+async function loadFallbackContacts(request, env) {
+  const store = getFallbackStore();
+  if (store.length === 0) {
+    try {
+      if (env && typeof env.ASSETS?.fetch === 'function') {
+        const fallbackResponse = await env.ASSETS.fetch(new Request(new URL('/data/contacts.json', request.url)));
+        if (fallbackResponse.ok) {
+          const fallbackJson = await fallbackResponse.json();
+          if (Array.isArray(fallbackJson)) {
+            fallbackJson.forEach(item => store.push(item));
+          }
+        }
+      }
+    } catch (fallbackErr) {
+      console.error('Fallback contacts read error:', fallbackErr);
+    }
+  }
+  return store;
+}
+
 function isAdminAuthorized(request, env) {
   try {
     const auth = request.headers.get('Authorization');
@@ -50,23 +82,9 @@ export async function handleContactsRequest(request, env) {
     }
 
     try {
-      const kv = env && env.CONTACTS_KV;
+      const kv = getContactsKv(env);
       if (!kv || typeof kv.list !== 'function') {
-        const fallback = [];
-        try {
-          if (env && typeof env.ASSETS?.fetch === 'function') {
-            const fallbackResponse = await env.ASSETS.fetch(new Request(new URL('/data/contacts.json', request.url)));
-            if (fallbackResponse.ok) {
-              const fallbackJson = await fallbackResponse.json();
-              if (Array.isArray(fallbackJson)) {
-                fallbackJson.forEach(item => fallback.push(item));
-              }
-            }
-          }
-        } catch (fallbackErr) {
-          console.error('Fallback contacts read error:', fallbackErr);
-        }
-
+        const fallback = await loadFallbackContacts(request, env);
         fallback.sort((a, b) => (a.receivedAt < b.receivedAt) ? 1 : -1);
         return new Response(JSON.stringify(fallback), { status: 200, headers: { 'Content-Type': 'application/json' } });
       }
@@ -109,11 +127,14 @@ export async function handleContactsRequest(request, env) {
 
     let savedKey = null;
     try {
-      const kv = env && env.CONTACTS_KV;
+      const kv = getContactsKv(env);
       if (kv && typeof kv.put === 'function') {
         const key = `contact:${Date.now()}:${Math.random().toString(36).slice(2, 8)}`;
         await kv.put(key, JSON.stringify(result.data));
         savedKey = key;
+      } else {
+        const entry = Object.assign({}, result.data, { receivedAt: result.data.receivedAt || new Date().toISOString() });
+        getFallbackStore().push(entry);
       }
     } catch (kvErr) {
       console.error('KV put error:', kvErr);
