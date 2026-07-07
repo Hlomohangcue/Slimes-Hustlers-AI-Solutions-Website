@@ -11,6 +11,6 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",
-    "start-server-and-test": "^1.14.0"
+    "start-server-and-test": "^3.0.11"
   }
 }
