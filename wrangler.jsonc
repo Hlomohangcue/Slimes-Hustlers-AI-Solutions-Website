@@ -1,5 +1,6 @@
 ﻿{
   "name": "slimes-hustlers-ai-solutions-website",
+  "main": "src/index.js",
   "compatibility_date": "2025-12-01",
   "compatibility_flags": [
     "nodejs_compat"
