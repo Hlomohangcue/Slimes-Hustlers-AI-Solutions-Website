@@ -1,5 +1,8 @@
 # Node dependencies
 node_modules/
+.wrangler/
+test-results/
+coverage/
 
 # Local environment files
 .env
