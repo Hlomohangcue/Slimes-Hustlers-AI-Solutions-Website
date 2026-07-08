@@ -273,6 +273,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         formStatus.textContent = 'Message sent successfully. We will contact you soon.';
         form.reset();
+        const followUpButton = document.getElementById('whatsappFollowUpButton');
+        if (followUpButton) {
+          followUpButton.hidden = false;
+        }
         // reset aria-invalid attributes
         clearErrors();
         if (submitButton) { submitButton.disabled = false; submitButton.removeAttribute('aria-busy'); }
