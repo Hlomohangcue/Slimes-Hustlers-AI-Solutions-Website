@@ -4,6 +4,25 @@ const { test, expect } = require('@playwright/test');
 const BASE = process.env.BASE_URL || 'http://localhost:8080';
 
 test.describe('Contact form accessibility and submission', () => {
+  test('renders WhatsApp entry points and shows a follow-up CTA after success', async ({ page }) => {
+    await page.goto(BASE + '/index.html');
+
+    const floatingButton = page.locator('#whatsappFloatButton');
+    await expect(floatingButton).toBeVisible();
+    await expect(floatingButton).toHaveAttribute('href', /wa\.me\/26662274073/i);
+
+    await page.fill('#fullName', 'QA Tester');
+    await page.fill('#email', 'tester@example.com');
+    await page.fill('#phone', '+1234567890');
+    await page.fill('#company', 'Test Co');
+    await page.fill('#message', 'Testing automated submission.');
+
+    await page.route('**/api/contacts', route => route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ ok: true }) }));
+
+    await page.click('#submitButton');
+    await expect(page.locator('#formStatus')).toHaveText(/Message sent successfully/i, { timeout: 5000 });
+  });
+
   test('form fields have proper ARIA attributes and errors appear', async ({ page }) => {
     // Capture page console for debugging
     page.on('console', msg => console.log('PAGE LOG>', msg.text()));

@@ -751,15 +751,6 @@ textarea:focus {
   margin-top: 0.5rem;
 }
 
-.contact-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.9rem;
-  align-items: center;
-}
-
-.whatsapp-contact-button,
-.whatsapp-follow-up,
 .whatsapp-float-button,
 .footer-whatsapp {
   display: inline-flex;
@@ -770,29 +761,12 @@ textarea:focus {
   transition: transform 0.24s ease, box-shadow 0.24s ease, background 0.24s ease;
 }
 
-.whatsapp-contact-button,
-.whatsapp-follow-up {
-  padding: 0.95rem 1.25rem;
-  border: 1px solid rgba(37, 211, 102, 0.28);
-  background: rgba(37, 211, 102, 0.12);
-  color: #ecfdf3;
-}
-
-.whatsapp-contact-button:hover,
-.whatsapp-contact-button:focus-visible,
-.whatsapp-follow-up:hover,
-.whatsapp-follow-up:focus-visible,
 .whatsapp-float-button:hover,
 .whatsapp-float-button:focus-visible,
 .footer-whatsapp:hover,
 .footer-whatsapp:focus-visible {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(37, 211, 102, 0.16);
-}
-
-.whatsapp-follow-up {
-  width: fit-content;
-  margin-top: 0.2rem;
 }
 
 .whatsapp-icon {
