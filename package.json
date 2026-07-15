@@ -5,10 +5,10 @@
   "scripts": {
     "start": "npx http-server -p 8080 -c-1",
     "deploy": "wrangler deploy",
-    "test:playwright": "npx playwright test",
+    "test:playwright": "npx playwright test --config=tests/playwright.config.js",
     "test": "npx start-server-and-test start http://localhost:8080 test:playwright",
-    "test:sanitize": "node tests/sanitize.test.js",
-    "test:headed": "npx playwright test --headed"
+    "test:sanitize": "node tests/sanitize.test.js && node tests/health.test.js && node tests/security-headers.test.js",
+    "test:headed": "npx playwright test --config=tests/playwright.config.js --headed"
   },
   "devDependencies": {
     "@playwright/test": "^1.40.0",

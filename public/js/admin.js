@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   try {
+    // Cookie-authenticated request to admin contacts endpoint.
     const response = await fetch('/api/contacts', { credentials: 'include' });
     
     if (response.status === 401) {
@@ -33,6 +34,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       return;
     }
 
+    // Render newest messages first for faster admin triage.
     contacts.reverse().forEach(contact => {
       const row = document.createElement('tr');
 

@@ -1,5 +1,6 @@
 import { sanitizeInput } from './sanitize.js';
 
+// Parse Cookie header into a key/value object.
 function parseCookies(cookieHeader) {
   const obj = {};
   if (!cookieHeader) return obj;
@@ -14,6 +15,7 @@ function parseCookies(cookieHeader) {
   return obj;
 }
 
+// In-memory fallback used only when KV is unavailable.
 function getFallbackStore() {
   if (typeof globalThis === 'undefined') return [];
   if (!Array.isArray(globalThis.__CONTACTS_FALLBACK_STORE__)) {
@@ -22,10 +24,12 @@ function getFallbackStore() {
   return globalThis.__CONTACTS_FALLBACK_STORE__;
 }
 
+// Support both CONTACTS_KV and legacy CONTACT_KV binding names.
 function getContactsKv(env) {
   return env?.CONTACTS_KV || env?.CONTACT_KV || null;
 }
 
+// Load seeded contacts from static JSON when KV is not configured.
 async function loadFallbackContacts(request, env) {
   const store = getFallbackStore();
   if (store.length === 0) {
@@ -46,6 +50,7 @@ async function loadFallbackContacts(request, env) {
   return store;
 }
 
+// Admin authorization via bearer token or HttpOnly cookie.
 function isAdminAuthorized(request, env) {
   try {
     const auth = request.headers.get('Authorization');
@@ -63,6 +68,7 @@ function isAdminAuthorized(request, env) {
   return false;
 }
 
+// Handle contact submission and admin retrieval endpoints.
 export async function handleContactsRequest(request, env) {
   if (request.method === 'OPTIONS') {
     return new Response(null, {
