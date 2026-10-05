@@ -22,9 +22,9 @@ These tests run directly in Node and focus on specific modules or endpoint handl
 
 Included files:
 
-- tests/sanitize.test.js
-- tests/contacts-fallback.test.js
-- tests/health.test.js
+- tests/sanitize.test.cjs
+- tests/contacts-fallback.test.cjs
+- tests/health.test.cjs
 
 Coverage focus:
 
@@ -38,7 +38,7 @@ These tests run with Playwright and validate user workflows through a browser se
 
 Included file:
 
-- tests/contact.spec.js
+- tests/contact.spec.cjs
 
 Coverage focus:
 
@@ -48,10 +48,10 @@ Coverage focus:
 
 ## Test File Inventory
 
-- tests/sanitize.test.js: Verifies sanitize utility behavior and expected transformed output.
-- tests/contact.spec.js: Validates UI-level contact form behavior using Playwright.
-- tests/contacts-fallback.test.js: Verifies fallback contact retrieval path when KV data source is unavailable.
-- tests/health.test.js: Validates GET /health response structure and required fields.
+- tests/sanitize.test.cjs: Verifies sanitize utility behavior and expected transformed output.
+- tests/contact.spec.cjs: Validates UI-level contact form behavior using Playwright.
+- tests/contacts-fallback.test.cjs: Verifies fallback contact retrieval path when KV data source is unavailable.
+- tests/health.test.cjs: Validates GET /health response structure and required fields.
 
 ## Available NPM Test Commands
 
@@ -67,7 +67,7 @@ Command details:
 | Command | Purpose |
 | --- | --- |
 | npm test | Starts a local server and runs Playwright tests through the default config. |
-| npm run test:playwright | Runs Playwright tests directly with tests/playwright.config.js. |
+| npm run test:playwright | Runs Playwright tests directly with tests/playwright.config.cjs. |
 | npm run test:sanitize | Runs Node unit-style checks for sanitize and health tests. |
 | npm run test:headed | Runs Playwright tests in headed mode for local debugging. |
 
@@ -98,8 +98,8 @@ This means test failures block the validation and deployment stages.
 
 ### Where To Add Tests
 
-- Add Node unit-style tests in the tests directory using *.test.js naming.
-- Add browser integration tests in the tests directory using *.spec.js naming.
+- Add Node unit-style CommonJS tests in the tests directory using *.test.cjs naming.
+- Add browser integration CommonJS tests in the tests directory using *.spec.cjs naming.
 
 ### Suggested Workflow
 
@@ -122,7 +122,7 @@ Recommended local verification:
 
 ## Playwright Notes
 
-Playwright is configured in tests/playwright.config.js with:
+Playwright is configured in tests/playwright.config.cjs with:
 
 - Headless mode enabled by default.
 - Desktop viewport defaults.

@@ -156,10 +156,10 @@ Add project screenshots under `docs/screenshots/` and update the placeholders be
 |   |-- logout.js
 |   `-- sanitize.js
 |-- tests/
-|   |-- contact.spec.js
-|   |-- contacts-fallback.test.js
-|   |-- sanitize.test.js
-|   `-- playwright.config.js
+|   |-- contact.spec.cjs
+|   |-- contacts-fallback.test.cjs
+|   |-- sanitize.test.cjs
+|   `-- playwright.config.cjs
 |-- wrangler.jsonc
 |-- package.json
 `-- README.md

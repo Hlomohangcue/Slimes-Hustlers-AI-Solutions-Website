@@ -30,14 +30,4 @@ function sanitizeInput(obj) {
   return { data: sanitized, errors };
 }
 
-// CommonJS export for Node-based tests.
-if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { sanitizeInput, stripTags, isEmail };
-}
-
-// Expose utility globally for fallback/runtime compatibility.
-if (typeof globalThis !== 'undefined') {
-  globalThis.sanitizeInput = sanitizeInput;
-}
-
 export { sanitizeInput, stripTags, isEmail };

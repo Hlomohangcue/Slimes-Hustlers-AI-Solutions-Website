@@ -4,7 +4,7 @@ const { defineConfig } = require('@playwright/test');
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
 module.exports = defineConfig({
   testDir: './',
-  testMatch: '**/*.spec.js',
+  testMatch: '**/*.spec.cjs',
   retries: 0,
   use: {
     headless: true,
