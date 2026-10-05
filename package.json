@@ -1,0 +1,17 @@
+{
+  "name": "slimeshustlers-website",
+  "version": "1.0.0",
+  "description": "Slimes.Hustlers AI Solutions website - automated tests for contact form",
+  "scripts": {
+    "start": "npx http-server -p 8080 -c-1",
+    "deploy": "wrangler deploy",
+    "test:playwright": "npx playwright test --config=tests/playwright.config.js",
+    "test": "npx start-server-and-test start http://localhost:8080 test:playwright",
+    "test:sanitize": "node tests/sanitize.test.js && node tests/health.test.js && node tests/security-headers.test.js",
+    "test:headed": "npx playwright test --config=tests/playwright.config.js --headed"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "start-server-and-test": "^3.0.11"
+  }
+}

@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Communication Bridge AI",
+    "category": "AI & Intelligent Systems",
+    "description": "An AI-assisted communication system connecting verbal and non-verbal users through text, gesture interpretation, and context-aware responses.",
+    "technologies": ["Python", "FastAPI", "JavaScript", "Gesture AI", "SQLite"],
+    "githubUrl": "https://github.com/Hlomohangcue/Communication-Agent-AI"
+  },
+  {
+    "name": "Horizon AI-Powered POS System",
+    "category": "Business Systems",
+    "description": "A point-of-sale system with inventory management, sales processing, forecasting, customer insights, and fraud detection.",
+    "technologies": ["Python", "Streamlit", "scikit-learn", "Pandas", "Plotly"],
+    "githubUrl": "https://github.com/Hlomohangcue/Horizon-AI-Powered-POS"
+  },
+  {
+    "name": "LandReGen MVP",
+    "category": "Environmental AI",
+    "description": "A land-monitoring platform using satellite analysis to track vegetation health, assess degradation risk, and support restoration planning.",
+    "technologies": ["Python", "FastAPI", "JavaScript", "MySQL", "Satellite Analysis"],
+    "githubUrl": "https://github.com/Hlomohangcue/landreGen-mvp",
+    "demoUrl": "https://landre-gen-mvp.vercel.app/"
+  },
+  {
+    "name": "PowerAI — Intelligent Renewable Energy Management System",
+    "category": "AI & Intelligent Systems",
+    "description": "A multi-tenant renewable-energy platform for real-time monitoring, interactive analytics, and AI-powered demand forecasting.",
+    "technologies": ["Python", "Streamlit", "ARIMA", "LSTM", "Plotly", "Docker"],
+    "githubUrl": "https://github.com/Hlomohangcue/PLP-Final-Project-PowerAI"
+  },
+  {
+    "name": "Makeng Salon Booking System",
+    "category": "Booking Platforms",
+    "description": "An online salon booking platform for exploring services and scheduling appointments.",
+    "technologies": ["React", "TypeScript", "Vite", "Tailwind CSS", "Firebase"],
+    "githubUrl": "https://github.com/Hlomohangcue/salon-booking-system",
+    "demoUrl": "https://booking.slimeshustlers.com/"
+  },
+  {
+    "name": "E-commerce Shopping App",
+    "category": "E-commerce",
+    "description": "A shopping app that lets businesses upload products and customers purchase them.",
+    "technologies": ["TypeScript"],
+    "githubUrl": "https://github.com/Hlomohangcue/e-commece_shopping"
+  }
+]
