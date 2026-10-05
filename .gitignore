@@ -2,7 +2,6 @@
 node_modules/
 .wrangler/
 test-results/
-tests/
 coverage/
 
 # Local environment files
@@ -21,4 +20,3 @@ secrets.json
 
 # OS files
 .DS_Store
-

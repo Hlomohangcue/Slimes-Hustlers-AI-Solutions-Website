@@ -1,9 +1,10 @@
 // @ts-check
-const { devices } = require('@playwright/test');
+const { defineConfig } = require('@playwright/test');
 
 /** @type {import('@playwright/test').PlaywrightTestConfig} */
-module.exports = {
+module.exports = defineConfig({
   testDir: './',
+  testMatch: '**/*.spec.js',
   retries: 0,
   use: {
     headless: true,
@@ -11,4 +12,4 @@ module.exports = {
     actionTimeout: 10000,
     ignoreHTTPSErrors: true
   }
-};
+});
